@@ -9,6 +9,7 @@ This is my README for Assignment 5
 * [License](#License)
 
 Page is live: [HERE](https://kevsaj.github.io/Work-Day-Scheduler/.)
+
 ![Should Look like this lol](/Assets/05-third-party-apis-homework-demo.gif "demo")
 
 
