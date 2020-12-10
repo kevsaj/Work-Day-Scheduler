@@ -25,7 +25,22 @@ function initializeSchedule() {
 
 }
 
+function setUpTimeBlocks() {
+    $timeBlocks.each(function () {
+        var $thisBlock = $(this);
+        var thisBlockHr = parseInt($thisBlock.attr("data-hour"));
 
+        if (thisBlockHr == currentHour) {
+            $thisBlock.addClass("present").removeClass("past future");
+        }
+        if (thisBlockHr < currentHour) {
+            $thisBlock.addClass("past").removeClass("present future");
+        }
+        if (thisBlockHr > currentHour) {
+            $thisBlock.addClass("future").removeClass("past present");
+        }
+    });
+}
 
 
 
@@ -34,6 +49,7 @@ function localStorage() {
 
         localStorage.setItem(currentHour, textInput1.value)
 
-    }}
+    }
+}
 
-    saveBtn.addEventListener("click", localStorage)
+saveBtn.addEventListener("click", localStorage)

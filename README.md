@@ -14,7 +14,7 @@ Page is live: [HERE](https://kevsaj.github.io/Work-Day-Scheduler/.)
 
 
 # Installation
-* Learn jQuery magic!
+* Learn jQuery and moment.js magic!
 * Get Motivated
 * Create Scheduler to meet criteria
 * Upload to Github 
