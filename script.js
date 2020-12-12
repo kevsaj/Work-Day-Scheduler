@@ -21,7 +21,7 @@ function initializeSchedule() {
         toDoItems.push(todoObj);
     });
 
-    localStorage.setItem("todos", JSON.stringify(currentHour, textInput1.value));
+    localStorage.setItem("todos", JSON.stringify(toDoItems));
 
 }
 
@@ -42,14 +42,52 @@ function setUpTimeBlocks() {
     });
 }
 
+function renderSchedule() {
 
+    toDoItems = localStorage.getItem("todos");
+    toDoItems = JSON.parse(toDoItems);
 
-function localStorage() {
-    if (typeof (Storage) !== "undefined") {
+    for (var i = 0; i < toDoItems.length; i++) {
+        var itemHour = toDoItems[i].hour;
+        var itemText = toDoItems[i].text;
 
-        localStorage.setItem(currentHour, textInput1.value)
-
+        $("[data-hour=" + itemHour + "]").children("textarea").val(itemText);
     }
+
+    console.log(toDoItems);
 }
 
-saveBtn.addEventListener("click", localStorage)
+
+function saveHandler() {
+    var $thisBlock = $(this).parent();
+
+    var hourToUpdate = $(this).parent().attr("data-hour");
+    var itemToAdd = (($(this).parent()).children("textarea")).val();
+
+    for (var j = 0; j < toDoItems.length; j++) {
+        if (toDoItems[j].hour == hourToUpdate) {
+            toDoItems[j].text = itemToAdd;
+        }
+    }
+    localStorage.setItem("todos", JSON.stringify(toDoItems));
+    renderSchedule();
+}
+
+$(document).ready(function () {
+
+    setUpTimeBlocks();
+    if (!localStorage.getItem("todos")) {
+        initializeSchedule();
+    }
+
+    $currentDay.text(currentDate);
+
+    renderSchedule();
+    $scheduleArea.on("click", "button", saveHandler);
+
+});
+
+
+for (var i = 0; i < saveBtn.length; i++) {
+    saveBtn[i].addEventListener('click', saveBtn, false);
+}
